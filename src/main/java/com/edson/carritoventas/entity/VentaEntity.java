@@ -16,7 +16,6 @@ public class VentaEntity implements Serializable {
     private long id;
 
     @ManyToOne
-    @Column(name="idcliente")
     private ClienteEntity idcliente;
 
     @Column(name = "fecha")

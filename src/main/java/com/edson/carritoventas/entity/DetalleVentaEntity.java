@@ -15,11 +15,9 @@ public class DetalleVentaEntity implements Serializable {
     private long id;
 
     @ManyToOne
-    @Column(name = "idventa")
     private VentaEntity idventa;
 
     @ManyToOne
-    @Column(name = "idproducto")
     private ProductoEntity idproducto;
 
     public DetalleVentaEntity(long id, VentaEntity idventa, ProductoEntity idproducto) {
