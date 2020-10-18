@@ -1,34 +1,26 @@
 package com.edson.carritoventas.rest;
 
 import com.edson.carritoventas.dto.User;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 @RestController
 public class UserController {
+
+    private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @PostMapping("/login")
     public User login(@RequestBody User usuarioRequest) {
@@ -39,8 +31,9 @@ public class UserController {
             user.setUsuario(usuarioRequest.getUsuario());
             user.setClave("***");
             user.setToken(token);
+            logger.debug("Bienvenido "+ user.getUsuario());
         }catch (Exception e){
-
+            logger.info(e);
         }
         return user;
 
@@ -60,7 +53,7 @@ public class UserController {
             }
             lector.close();
         }catch (Exception e){
-            throw new RuntimeException("Se produjo un error al iniciar session");
+            throw new RuntimeException("Datos incorrectos en el logueo");
         }
         return token;
     }

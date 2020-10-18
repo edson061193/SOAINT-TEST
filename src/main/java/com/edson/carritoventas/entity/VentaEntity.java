@@ -21,6 +21,9 @@ public class VentaEntity implements Serializable {
     @Column(name = "fecha")
     private Date fechaventa;
 
+    public VentaEntity() {
+    }
+
     public VentaEntity(long id, ClienteEntity idcliente, Date fechaventa) {
         this.id = id;
         this.idcliente = idcliente;

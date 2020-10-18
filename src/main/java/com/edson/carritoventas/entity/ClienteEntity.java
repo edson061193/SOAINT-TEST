@@ -1,5 +1,7 @@
 package com.edson.carritoventas.entity;
 
+import com.edson.carritoventas.dto.Cliente;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -10,7 +12,7 @@ public class ClienteEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="idcliente")
     private long id;
 
@@ -28,6 +30,24 @@ public class ClienteEntity implements Serializable {
 
     @Column(name = "email" , nullable = false)
     private String email;
+
+    public ClienteEntity(long id, String nombre, String apellido, String dni, String telefono, String email) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.email = email;
+    }
+
+    public ClienteEntity(Cliente cliente) {
+        this.id = cliente.getId();
+        this.apellido = cliente.getApellido();
+        this.dni = cliente.getDni();
+        this.email = cliente.getEmail();
+        this.nombre = cliente.getNombre();
+        this.telefono = cliente.getTelefono();
+    }
 
 
     public long getId() {
