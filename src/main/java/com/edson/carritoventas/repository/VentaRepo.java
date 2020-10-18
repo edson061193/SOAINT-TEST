@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface VentaRepo extends JpaRepository<VentaEntity, Serializable> {
-    List<VentaEntity> findByIdcliente(ClienteEntity clienteEntity);
+   // List<VentaEntity> findByIdcliente(ClienteEntity clienteEntity);
 }
